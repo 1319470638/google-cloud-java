@@ -83,6 +83,9 @@ public class BucketTest {
   private static final Boolean REQUESTER_PAYS = true;
   private static final String USER_PROJECT = "test-project";
   private static final Boolean DEFAULT_EVENT_BASED_HOLD = true;
+  private static final Long RETENTION_EFFECTIVE_TIME = 10L;
+  private static final Long RETENTION_PERIOD = 10L;
+  private static Boolean RETENTION_POLICY_IS_LOCKED = false;
   private static final BucketInfo FULL_BUCKET_INFO = BucketInfo.newBuilder("b")
       .setAcl(ACLS)
       .setEtag(ETAG)
@@ -103,6 +106,9 @@ public class BucketTest {
       .setRequesterPays(REQUESTER_PAYS)
       .setDefaultKmsKeyName(DEFAULT_KMS_KEY_NAME)
       .setDefaultEventBasedHold(DEFAULT_EVENT_BASED_HOLD)
+      .setRetentionEffectiveTime(RETENTION_EFFECTIVE_TIME)
+      .setRetentionPeriod(RETENTION_PERIOD)
+      .setRetentionPolicyIsLocked(RETENTION_POLICY_IS_LOCKED)
       .build();
   private static final BucketInfo BUCKET_INFO =
       BucketInfo.newBuilder("b").setMetageneration(42L).build();
@@ -718,6 +724,9 @@ public class BucketTest {
     assertEquals(REQUESTER_PAYS, bucket.requesterPays());
     assertEquals(DEFAULT_KMS_KEY_NAME, bucket.getDefaultKmsKeyName());
     assertEquals(DEFAULT_EVENT_BASED_HOLD, bucket.getDefaultEventBasedHold());
+    assertEquals(RETENTION_EFFECTIVE_TIME, bucket.getRetentionEffectiveTime());
+    assertEquals(RETENTION_PERIOD, bucket.getRetentionPeriod());
+    assertEquals(RETENTION_POLICY_IS_LOCKED, bucket.getRetentionPolicyIsLocked());
     assertEquals(storage.getOptions(), bucket.getStorage().getOptions());
   }
 }

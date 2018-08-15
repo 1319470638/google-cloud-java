@@ -642,6 +642,24 @@ public class Bucket extends BucketInfo {
     }
 
     @Override
+    Builder setRetentionEffectiveTime(Long retentionEffectiveTime) {
+      infoBuilder.setRetentionEffectiveTime(retentionEffectiveTime);
+      return this;
+    }
+
+    @Override
+    Builder setRetentionPolicyIsLocked(Boolean retentionIsLocked) {
+      infoBuilder.setRetentionPolicyIsLocked(retentionIsLocked);
+      return this;
+    }
+
+    @Override
+    public Builder setRetentionPeriod(Long retentionPeriod) {
+      infoBuilder.setRetentionPeriod(retentionPeriod);
+      return this;
+    }
+
+    @Override
     public Bucket build() {
       return new Bucket(storage, infoBuilder);
     }
