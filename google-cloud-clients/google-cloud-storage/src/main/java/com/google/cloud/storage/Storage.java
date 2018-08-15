@@ -96,7 +96,8 @@ public interface Storage extends Service<StorageOptions> {
     @GcpLaunchStage.Beta
     ENCRYPTION("encryption"),
     BILLING("billing"),
-    DEFAULT_EVENT_BASED_HOLD("defaultEventBasedHold");
+    DEFAULT_EVENT_BASED_HOLD("defaultEventBasedHold"),
+    RETENTION_POLICY("retentionPolicy");
 
     static final List<? extends FieldSelector> REQUIRED_FIELDS = ImmutableList.of(NAME);
 
@@ -141,6 +142,7 @@ public interface Storage extends Service<StorageOptions> {
     KMS_KEY_NAME("kmsKeyName"),
     EVENT_BASED_HOLD("eventBasedHold"),
     TEMPORARY_HOLD("temporaryHold"),
+    RETENTION_EXPIRATION_TIME("retentionExpirationTime"),
     UPDATED("updated");
 
     static final List<? extends FieldSelector> REQUIRED_FIELDS = ImmutableList.of(BUCKET, NAME);

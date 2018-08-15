@@ -969,8 +969,8 @@ public class BucketInfo implements Serializable {
     if (retentionPeriod != null) {
       Bucket.RetentionPolicy retentionPolicy = new Bucket.RetentionPolicy();
       retentionPolicy.setRetentionPeriod(retentionPeriod);
-      retentionPolicy.setIsLocked(retentionPolicyIsLocked);
-      retentionPolicy.setEffectiveTime(new DateTime(retentionEffectiveTime));
+//      retentionPolicy.setIsLocked(retentionPolicyIsLocked);
+//      retentionPolicy.setEffectiveTime(new DateTime(retentionEffectiveTime));
       bucketPb.setRetentionPolicy(retentionPolicy);
     }
 
@@ -1069,10 +1069,16 @@ public class BucketInfo implements Serializable {
       builder.setDefaultEventBasedHold(bucketPb.getDefaultEventBasedHold());
     }
     Bucket.RetentionPolicy retentionPolicy = bucketPb.getRetentionPolicy();
-    if (retentionPolicy != null && retentionPolicy.getRetentionPeriod() != null) {
-      builder.setRetentionEffectiveTime(retentionPolicy.getEffectiveTime().getValue());
-      builder.setRetentionPolicyIsLocked(retentionPolicy.getIsLocked());
-      builder.setRetentionPeriod(retentionPolicy.getRetentionPeriod());
+    if (retentionPolicy != null) {
+      if (retentionPolicy.getEffectiveTime() != null) {
+        builder.setRetentionEffectiveTime(retentionPolicy.getEffectiveTime().getValue());
+      }
+      if (retentionPolicy.getIsLocked() != null) {
+        builder.setRetentionPolicyIsLocked(retentionPolicy.getIsLocked());
+      }
+      if (retentionPolicy.getRetentionPeriod() != null) {
+        builder.setRetentionPeriod(retentionPolicy.getRetentionPeriod());
+      }
     }
     return builder.build();
   }
