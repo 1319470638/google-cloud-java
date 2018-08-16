@@ -112,6 +112,7 @@ public class ITStorageTest {
   private static final String KMS_KEY_NAME_2 = "projects/gcloud-devel/locations/us/keyRings/gcs_kms_key_ring_us/cryptoKeys/key2";
   private static final Long RETENTION_PERIOD = 5L;
   private static final Long RETENTION_PERIOD_IN_MILLISECONDS = RETENTION_PERIOD * 1000;
+
   @BeforeClass
   public static void beforeClass() throws NoSuchAlgorithmException, InvalidKeySpecException {
     remoteStorageHelper = RemoteStorageHelper.create();
