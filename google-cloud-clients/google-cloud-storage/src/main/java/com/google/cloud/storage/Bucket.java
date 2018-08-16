@@ -1136,6 +1136,25 @@ public class Bucket extends BucketInfo {
   }
 
   /**
+   * TODO: Frank -- needs better documentation that links to support methods.
+   * Lock a bucket retention policy.
+   *
+   * Accepts an optional userProject {@link BucketTargetOption} option which defines the project id
+   * to assign operational costs.
+   *
+   * <p>Example of locking a retention policy on a bucket, only if its metageneration matches the buckets
+   * metagenerationn otherwise a {@link StorageException} is thrown.
+   * <pre> {@code
+   * bucket.lockRetentionPolicy(BucketTargetOption.metagenerationMatch());
+   * }</pre>
+   *
+   * @throws StorageException upon failure
+   */
+  public Bucket lockRetentionPolicy(BucketTargetOption... options) {
+    return storage.lockRetentionPolicy(BucketInfo.newBuilder(getName()).build(), options);
+  }
+
+  /**
    * Returns the bucket's {@code Storage} object used to issue requests.
    */
   public Storage getStorage() {

@@ -235,6 +235,23 @@ public class ITStorageTest {
   }
 
   @Test
+  public void testRetentionPolicyLock() throws ExecutionException, InterruptedException {
+    String bucketName = RemoteStorageHelper.generateBucketName();
+    BucketInfo bucketInfo = BucketInfo.newBuilder(bucketName).setRetentionPeriod(RETENTION_PERIOD).build();
+    Bucket remoteBucket = storage.create(bucketInfo);
+    try {
+      assertNull(remoteBucket.getRetentionPolicyIsLocked());
+      assertNotNull(remoteBucket.getRetentionEffectiveTime());
+      assertNotNull(remoteBucket.getMetageneration());
+      remoteBucket = storage.lockRetentionPolicy(remoteBucket, Storage.BucketTargetOption.metagenerationMatch());
+      assertTrue(remoteBucket.getRetentionPolicyIsLocked());
+      assertNotNull(remoteBucket.getRetentionEffectiveTime());
+    } finally {
+      RemoteStorageHelper.forceDelete(storage, bucketName, RETENTION_PERIOD, TimeUnit.SECONDS);
+    }
+  }
+
+  @Test
   public void testAttemptDeletionObjectRetentionPolicy() throws InterruptedException{
     String bucketName = RemoteStorageHelper.generateBucketName();
     Bucket remoteBucket = storage.create(BucketInfo.newBuilder(bucketName)

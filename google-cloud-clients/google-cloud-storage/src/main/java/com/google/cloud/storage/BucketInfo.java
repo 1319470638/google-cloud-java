@@ -969,8 +969,6 @@ public class BucketInfo implements Serializable {
     if (retentionPeriod != null) {
       Bucket.RetentionPolicy retentionPolicy = new Bucket.RetentionPolicy();
       retentionPolicy.setRetentionPeriod(retentionPeriod);
-//      retentionPolicy.setIsLocked(retentionPolicyIsLocked);
-//      retentionPolicy.setEffectiveTime(new DateTime(retentionEffectiveTime));
       bucketPb.setRetentionPolicy(retentionPolicy);
     }
 
